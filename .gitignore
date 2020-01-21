@@ -14,9 +14,9 @@
 *.rar
 
 # Eclipse stuff
-/.classpath
-/.project
-/.settings
+*.classpath
+*.project
+*.settings
 
 # we use maven!
 /build.xml
