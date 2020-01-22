@@ -1,11 +1,9 @@
 package com.portalhunters.weapons.swords;
 
+import com.portalhunters.PortalHunters;
 import com.portalhunters.weapons.Weapon;
-import org.bukkit.ChatColor;
+import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
-
-import java.util.Arrays;
 
 public class Sword extends Weapon {
 
@@ -13,4 +11,22 @@ public class Sword extends Weapon {
         super(sword);
     }
 
+    public Sword(Material material, int level) {
+        super(material, level);
+    }
+
+    @Override
+    protected void generateWeaponStats(int level) {
+        super.generateWeaponStats(level);
+    }
+
+    @Override
+    protected void loadWeaponData() {
+        if(PortalHunters.database.contains("Weapons.Sword")) {
+            // TODO update variables with data from config like so:
+            // strength = PortalHunters.database.getInt("Weapons.Sword.Strength");
+        } else {
+            System.out.println("Error! Database empty!");
+        }
+    }
 }
