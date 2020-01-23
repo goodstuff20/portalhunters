@@ -1,7 +1,6 @@
 package com.portalhunters;
 
 import com.portalhunters.database.DataHandler;
-import com.portalhunters.weapons.swords.Sword;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
@@ -18,13 +17,16 @@ import java.util.Arrays;
 
 public class PortalHunters extends JavaPlugin {
     public static PortalHunters instance;
-    public static FileConfiguration database;
+    public static FileConfiguration config;
+
+    protected Utils utils;
 
     @Override
     public void onEnable() {
         //getLogger().info(ChatColor.AQUA + "[Tntbow]" + ChatColor.YELLOW + "is ready to go!");
         //getServer().getPluginManager().registerEvents(this, this);
-        DataHandler.reloadDatabase();
+        DataHandler.reloadConfigFile();
+        utils = new Utils();
     }
 
     @Override
@@ -49,9 +51,9 @@ public class PortalHunters extends JavaPlugin {
         return false;
     }
 
-    public static void saveDataBase() {
+    public static void saveConfigFile() {
         try {
-            database.save("plugins/PortalHunters/database.yml");
+            config.save("plugins/PortalHunters/config.yml");
         } catch (IOException e) {
             e.printStackTrace();
         }
