@@ -17,31 +17,22 @@ public class Sword extends Weapon {
     }
 
     @Override
-    protected void generateWeaponStats(int levels) {
+    protected void generateWeaponStats(int levels) { //TODO sind im Moment die Gleichen werte wie in der Weapon Klasse --> überflüssig!
     	int level = levels;
-    	switch (rarity) {
-        
-        case COMMON:
-        	
-        	strength = (int) Math.ceil((10+materialdamage)*1.13^(level-1) + ((math.random()*3)-1)*1.13^(level-1)))
-            break;
-        	
-        case UNCOMMON:
-        	
-        	strength = (int) Math.ceil((12+materialdamage)*1.13^(level-1) + ((math.random()*3)-1)*1.13^(level-1)))
-        	
-            break;
-        	
-        case RARE:
-        	
-        	strength = (int) Math.ceil((15+materialdamage)*1.13^(level-1) + ((math.random()*3)-1)*1.13^(level-1)))- 
-            break;
-        	
-        case LEGENDARY:
-        	
-        	strength = (int) Math.ceil((19+materialdamage)*1.13^(level-1) + ((math.random()*3)-1)*1.13^(level-1)))
-            break;
-    }
+        switch (rarity) {
+            case COMMON:
+                strength = (int) Math.ceil((10+materialdamage)*Math.pow(1.13,(level-1)) + ((Math.random()*3)-1)*Math.pow(1.13,(level-1)));
+                break;
+            case UNCOMMON:
+                strength = (int) Math.ceil((12+materialdamage)*Math.pow(1.13,(level-1)) + ((Math.random()*3)-1)*Math.pow(1.13,(level-1)));
+                break;
+            case RARE:
+                strength = (int) Math.ceil((15+materialdamage)*Math.pow(1.13,(level-1)) + ((Math.random()*3)-1)*Math.pow(1.13,(level-1)));
+                break;
+            case LEGENDARY:
+                strength = (int) Math.ceil((19+materialdamage)*Math.pow(1.13,(level-1)) + ((Math.random()*3)-1)*Math.pow(1.13,(level-1)));
+                break;
+        }
     }
 
     @Override
