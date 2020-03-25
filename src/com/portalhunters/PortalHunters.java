@@ -1,5 +1,6 @@
 package com.portalhunters;
 
+import com.portalhunters.actions.ActionListener;
 import com.portalhunters.database.DataHandler;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -18,6 +19,7 @@ import java.util.Arrays;
 public class PortalHunters extends JavaPlugin {
     public static PortalHunters instance;
     public static FileConfiguration config;
+    public ActionListener actionListener;
 
     protected Utils utils;
 
@@ -27,6 +29,7 @@ public class PortalHunters extends JavaPlugin {
         //getServer().getPluginManager().registerEvents(this, this);
         DataHandler.reloadConfigFile();
         utils = new Utils();
+        actionListener = new ActionListener();
     }
 
     @Override
