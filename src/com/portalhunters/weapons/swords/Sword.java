@@ -46,7 +46,7 @@ public class Sword extends Weapon {
 
     @Override
     protected void loadWeaponData() {
-        if(PortalHunters.database.contains("Weapons.Sword")) {
+        if(PortalHunters.config.contains("Weapons.Sword")) {
             // TODO update variables with data from config like so:
             // strength = PortalHunters.database.getInt("Weapons.Sword.Strength");
         } else {
