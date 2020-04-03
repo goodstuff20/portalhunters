@@ -45,16 +45,16 @@ public class Weapon {
     	int level = levels;
         switch (rarity) {
             case COMMON:
-                strength = (int) Math.ceil((10+materialdamage)*Math.pow(1.13,(level-1)) + ((Math.random()*3)-1)*Math.pow(1.13,(level-1)));
+                strength = (int) Math.ceil((10)*Math.pow(1.13,(level-1)) + ((Math.random()*3)-1)*Math.pow(1.13,(level-1)));
                 break;
             case UNCOMMON:
-                strength = (int) Math.ceil((12+materialdamage)*Math.pow(1.13,(level-1)) + ((Math.random()*3)-1)*Math.pow(1.13,(level-1)));
+                strength = (int) Math.ceil((12)*Math.pow(1.13,(level-1)) + ((Math.random()*3)-1)*Math.pow(1.13,(level-1)));
                 break;
             case RARE:
-                strength = (int) Math.ceil((15+materialdamage)*Math.pow(1.13,(level-1)) + ((Math.random()*3)-1)*Math.pow(1.13,(level-1)));
+                strength = (int) Math.ceil((15)*Math.pow(1.13,(level-1)) + ((Math.random()*3)-1)*Math.pow(1.13,(level-1)));
                 break;
             case LEGENDARY:
-                strength = (int) Math.ceil((19+materialdamage)*Math.pow(1.13,(level-1)) + ((Math.random()*3)-1)*Math.pow(1.13,(level-1)));
+                strength = (int) Math.ceil((19)*Math.pow(1.13,(level-1)) + ((Math.random()*3)-1)*Math.pow(1.13,(level-1)));
                 break;
         }
         // weapon = new ...; weapon.set...
