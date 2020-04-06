@@ -20,8 +20,16 @@ public class Action {
         }
     }
 
-    private void observerInit(){
+    public void stop(){
+        observerQuit();
+    }
+
+    protected void observerInit(){
         // e.g. PortalHunters.instance.actionListener.addObserver(this, EventType.ENTITY_DEATH_EVENT);
+    }
+
+    private void observerQuit(){
+        PortalHunters.instance.actionListener.removeObserver(this);
     }
 
     public void observerNotify(EventType eventType){

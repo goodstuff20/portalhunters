@@ -3,15 +3,14 @@ package com.portalhunters.actions;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDeathEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-enum EventType {
-    ENTITY_DEATH_EVENT;
-}
+
 
 public class ActionListener implements Listener {
 
@@ -42,5 +41,11 @@ public class ActionListener implements Listener {
     @EventHandler
     public void onPlayerDie(EntityDeathEvent event) {
         notifyActions(EventType.ENTITY_DEATH_EVENT);
+    }
+
+    @EventHandler
+    public void fireSpell(PlayerInteractEvent event) {
+        //if(event.)
+        Material.SWORD
     }
 }
