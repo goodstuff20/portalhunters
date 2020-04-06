@@ -1,39 +1,37 @@
 package com.portalhunters.weapons;
 
+import org.bukkit.ChatColor;
 import org.bukkit.Effect;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
+
 import java.math.*;
+import java.util.Arrays;
 
 public class Weapon {
     protected ItemStack weapon; //= new ItemStack(Material.BOW, 1);
     protected Rarity rarity;
     protected Material material;
-    protected String klasse;
-    protected int schärfegrad, strength, attackspeed,materialdamage;
-    protected Effect effect;
+    protected int strength, attackspeed; // + elementschaden?
     protected boolean doublehand;
+    protected String title;
+    // effect?
     
     // TODO add item properties, e.g.: protected int strength;
 
-    public Weapon(ItemStack weapon) {
-        this.weapon = weapon;
-    }
-
-    public Weapon(Material material, int level) {
+    public Weapon(Material material, int level, String title) {
         //TODO nur für die Schwert klasse für jetzt getan, soll das bleiben? Was für standard types?
-        this(material, level, 0, Rarity.COMMON, "", null, false);
+        this(material, level, Rarity.COMMON, false, title);
     }
 
-    public Weapon(Material material, int level,int materialdamage, Rarity r, String klasse, Effect effekt, boolean doublehand ) {
+    public Weapon(Material material, int level, Rarity r, boolean doublehand, String title) {
     	this.rarity = r;
         this.material = material;
-        this.materialdamage = materialdamage;
-        this.klasse = klasse;
-        this.effect = effect;
         this.doublehand = doublehand;
+        this.title = title;
         generateWeaponStats(level);
-        
+        generateItemStack();
     }
     
     public boolean getDoubleHand() {
@@ -58,6 +56,20 @@ public class Weapon {
                 break;
         }
         // weapon = new ...; weapon.set...
+    }
+
+    protected void generateItemStack(){
+        weapon = new ItemStack(this.material, 1);
+        ItemMeta meta = weapon.getItemMeta();
+        meta.setDisplayName(ChatColor.BLUE + title);  //TODO util method to change & § to colors
+        meta.setLore(Arrays.asList(rarity == Rarity.COMMON ? rarity.toString() :
+                rarity == Rarity.UNCOMMON ? ChatColor.AQUA +  rarity.toString() :
+                rarity == Rarity.RARE ? ChatColor.RED +  rarity.toString() :
+                ChatColor.GOLD + "" + ChatColor.BOLD + rarity.toString(), // LEGENDARY
+                "",
+                "Strength: " + strength,
+                "Attack speed: " + attackspeed));
+        weapon.setItemMeta(meta);
     }
 
     protected void loadWeaponData() {}

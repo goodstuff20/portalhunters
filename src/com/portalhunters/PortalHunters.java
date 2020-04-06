@@ -2,6 +2,8 @@ package com.portalhunters;
 
 import com.portalhunters.actions.ActionListener;
 import com.portalhunters.database.DataHandler;
+import com.portalhunters.weapons.sword.Subswords.*;
+import org.bukkit.Axis;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
@@ -49,6 +51,29 @@ public class PortalHunters extends JavaPlugin {
             meta.setLore(Arrays.asList("Die Waffe von Tod selbst", "", "Stärke: 2", "Durability: 1/5"));
             weapon.setItemMeta(meta);
             p.getInventory().setItemInMainHand(weapon);
+            return true;
+        }else if(cmd.getName().equalsIgnoreCase("weapon")) {
+            if(!(sender instanceof Player))
+                return false;
+            Player p = (Player)sender;
+            if(args.length == 2) { // /portalhunters weapon <axe/dagger/katana/longsword/spear>
+                if(args[1].equals("axe")){
+                    Axe axe = new Axe(Material.IRON_AXE, 10, "Axe of the dawn");
+                    p.getInventory().setItemInMainHand(axe.getWeapon());
+                }else if(args[1].equals("dagger")){
+                    Dagger dagger = new Dagger(Material.IRON_AXE, 10, "Swift Dagger");
+                    p.getInventory().setItemInMainHand(dagger.getWeapon());
+                }else if(args[1].equals("katana")){
+                    Katana katana = new Katana(Material.IRON_AXE, 10, "Chunchunmaru");
+                    p.getInventory().setItemInMainHand(katana.getWeapon());
+                }else if(args[1].equals("longsword")){
+                    Longsword longsword = new Longsword(Material.IRON_AXE, 10, "Steely longsword");
+                    p.getInventory().setItemInMainHand(longsword.getWeapon());
+                }else if(args[1].equals("spear")){
+                    Spear spear = new Spear(Material.IRON_AXE, 10, "Speeeer");
+                    p.getInventory().setItemInMainHand(spear.getWeapon());
+                }
+            }
             return true;
         }
         return false;

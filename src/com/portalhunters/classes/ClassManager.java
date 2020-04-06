@@ -19,6 +19,10 @@ public class ClassManager {
         fillWithDefaults();
     }
 
+    public SkillTree getSkillTree() {
+        return null; //TODO change
+    }
+
     void fillWithDefaults(){
         for(ClassType type : ClassType.values()) {
             switch(type) {

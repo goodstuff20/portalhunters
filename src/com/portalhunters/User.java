@@ -46,10 +46,10 @@ public class User {
 
     private void userRunnable(){ //TODO new actions, do: action.setUser(this)!
         // all user runnables here in one scheduler vs. multiple schedulers? Can do fast scheduler and skip x ticks if waiting
-        for(SkillTree.Skill skill : skillTree.getSkills()) {
-            if(skill.getAction().hasRunnable()) {
-                skill.getAction().actionRunnable(this);
+        //for(SkillTree.Skill skill : skillTree.getSkills()) {
+            if(skillTree.getSkill().getAction().hasRunnable()) {
+                skillTree.getSkill().getAction().actionRunnable(this);
             }
-        }
+        //}
     }
 }
