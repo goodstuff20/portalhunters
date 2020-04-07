@@ -1,5 +1,6 @@
 package com.portalhunters.weapons;
 
+import com.portalhunters.PortalHunters;
 import org.bukkit.ChatColor;
 import org.bukkit.Effect;
 import org.bukkit.Material;
@@ -8,6 +9,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import java.math.*;
 import java.util.Arrays;
+import java.util.Random;
 
 public class Weapon {
     protected ItemStack weapon; //= new ItemStack(Material.BOW, 1);
@@ -20,22 +22,37 @@ public class Weapon {
     
     // TODO add item properties, e.g.: protected int strength;
 
-    public Weapon(Material material, int level, String title) {
-        //TODO nur für die Schwert klasse für jetzt getan, soll das bleiben? Was für standard types?
-        this(material, level, Rarity.COMMON, false, title);
+    public Weapon(Material material, int level, Rarity r, WeaponType weaponType) {
+        this(material, level, r, null, weaponType);
     }
 
-    public Weapon(Material material, int level, Rarity r, boolean doublehand, String title) {
+    public Weapon(Material material, int level, Rarity r, String title) {
+        this(material, level, r, title, null);
+    }
+
+    private Weapon(Material material, int level, Rarity r, String title, WeaponType weaponType) {
     	this.rarity = r;
         this.material = material;
-        this.doublehand = doublehand;
         this.title = title;
+        if(title == null)
+            this.title = randomWeaponName(weaponType);
+        System.out.println("title = " + this.title);
         generateWeaponStats(level);
         generateItemStack();
     }
     
-    public boolean getDoubleHand() {
-    	return this.doublehand;
+    public String randomWeaponName(WeaponType weaponType){
+        String path = "weapons.";
+        switch(weaponType){
+            case AXE: path = path + "axe"; break;
+            case DAGGER: path = path + "dagger"; break;
+            case KATANA: path = path + "katana"; break;
+            case LONG_SWORD: path = path + "longsword"; break;
+            case SPEAR: path = path + "spear"; break;
+            default: System.out.println("Error!"); return null;
+        }
+        System.out.println("path = " + path);
+        return PortalHunters.names.getStringList(path).get(new Random().nextInt(PortalHunters.names.getStringList(path).size())); //TODO if called often, use global vars
     }
 
 
@@ -76,5 +93,9 @@ public class Weapon {
 
     public ItemStack getWeapon() {
         return weapon;
+    }
+
+    public boolean getDoubleHand() {
+        return this.doublehand;
     }
 }

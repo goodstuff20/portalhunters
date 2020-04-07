@@ -2,8 +2,8 @@ package com.portalhunters;
 
 import com.portalhunters.actions.ActionListener;
 import com.portalhunters.database.DataHandler;
-import com.portalhunters.weapons.sword.Subswords.*;
-import org.bukkit.Axis;
+import com.portalhunters.weapons.Rarity;
+import com.portalhunters.weapons.sword.*;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
@@ -21,6 +21,7 @@ import java.util.Arrays;
 public class PortalHunters extends JavaPlugin {
     public static PortalHunters instance;
     public static FileConfiguration config;
+    public static FileConfiguration names;
     public ActionListener actionListener;
 
     protected Utils utils;
@@ -29,7 +30,7 @@ public class PortalHunters extends JavaPlugin {
     public void onEnable() {
         //getLogger().info(ChatColor.AQUA + "[Tntbow]" + ChatColor.YELLOW + "is ready to go!");
         //getServer().getPluginManager().registerEvents(this, this);
-        DataHandler.reloadConfigFile();
+        DataHandler.loadFiles();
         utils = new Utils();
         actionListener = new ActionListener();
     }
@@ -40,41 +41,48 @@ public class PortalHunters extends JavaPlugin {
     //just testing:
     @EventHandler
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-        if(cmd.getName().equalsIgnoreCase("sword")) {
+        if(cmd.getName().equalsIgnoreCase("ph") || cmd.getName().equalsIgnoreCase("portalhunters")) {
             if(!(sender instanceof Player))
                 return false;
             Player p = (Player)sender;
-            //testing:
-            ItemStack weapon = new ItemStack(Material.IRON_SWORD, 1);
-            ItemMeta meta = weapon.getItemMeta();
-            meta.setDisplayName(ChatColor.BLUE + "Rusty long sword");
-            meta.setLore(Arrays.asList("Die Waffe von Tod selbst", "", "Stärke: 2", "Durability: 1/5"));
-            weapon.setItemMeta(meta);
-            p.getInventory().setItemInMainHand(weapon);
-            return true;
-        }else if(cmd.getName().equalsIgnoreCase("weapon")) {
-            if(!(sender instanceof Player))
-                return false;
-            Player p = (Player)sender;
-            if(args.length == 2) { // /portalhunters weapon <axe/dagger/katana/longsword/spear>
-                if(args[1].equals("axe")){
-                    Axe axe = new Axe(Material.IRON_AXE, 10, "Axe of the dawn");
-                    p.getInventory().setItemInMainHand(axe.getWeapon());
-                }else if(args[1].equals("dagger")){
-                    Dagger dagger = new Dagger(Material.IRON_AXE, 10, "Swift Dagger");
-                    p.getInventory().setItemInMainHand(dagger.getWeapon());
-                }else if(args[1].equals("katana")){
-                    Katana katana = new Katana(Material.IRON_AXE, 10, "Chunchunmaru");
-                    p.getInventory().setItemInMainHand(katana.getWeapon());
-                }else if(args[1].equals("longsword")){
-                    Longsword longsword = new Longsword(Material.IRON_AXE, 10, "Steely longsword");
-                    p.getInventory().setItemInMainHand(longsword.getWeapon());
-                }else if(args[1].equals("spear")){
-                    Spear spear = new Spear(Material.IRON_AXE, 10, "Speeeer");
-                    p.getInventory().setItemInMainHand(spear.getWeapon());
+
+            if(args.length > 0) {
+                if(args[0].equals("sword")) {
+                    //testing:
+                    ItemStack weapon = new ItemStack(Material.IRON_SWORD, 1);
+                    ItemMeta meta = weapon.getItemMeta();
+                    meta.setDisplayName(ChatColor.BLUE + "Rusty long sword");
+                    meta.setLore(Arrays.asList("Die Waffe von Tod selbst", "", "Stärke: 2", "Durability: 1/5"));
+                    weapon.setItemMeta(meta);
+                    p.getInventory().setItemInMainHand(weapon);
+                    return true;
+                }else if(args[0].equals("weapon")) {
+                    if(args.length == 2) { // /portalhunters weapon <axe/dagger/katana/longsword/spear>
+                        if(args[1].equals("axe")){
+                            Axe axe = new Axe(10);
+                            p.getInventory().setItemInMainHand(axe.getWeapon());
+                        }else if(args[1].equals("dagger")){
+                            Dagger dagger = new Dagger(12);
+                            p.getInventory().setItemInMainHand(dagger.getWeapon());
+                        }else if(args[1].equals("katana")){
+                            Katana katana = new Katana(15);
+                            p.getInventory().setItemInMainHand(katana.getWeapon());
+                        }else if(args[1].equals("longsword")){
+                            Longsword longsword = new Longsword(9);
+                            p.getInventory().setItemInMainHand(longsword.getWeapon());
+                        }else if(args[1].equals("spear")){
+                            Spear spear = new Spear(7);
+                            p.getInventory().setItemInMainHand(spear.getWeapon());
+                        }
+                    }
+                    return true;
                 }
+            } else {
+                p.sendMessage("=== PortalHunters ===");
+                p.sendMessage("/ph sword : get a rusty long sword");
+                p.sendMessage("/ph weapon <axe/dagger/katana/longsword/spear> : get a custom weapon");
             }
-            return true;
+
         }
         return false;
     }
@@ -82,6 +90,14 @@ public class PortalHunters extends JavaPlugin {
     public static void saveConfigFile() {
         try {
             config.save("plugins/PortalHunters/config.yml");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void saveNamesFile() {
+        try {
+            names.save("plugins/PortalHunters/names.yml");
         } catch (IOException e) {
             e.printStackTrace();
         }

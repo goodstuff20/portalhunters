@@ -24,6 +24,25 @@ public class FileLoader {
 
     public FileConfiguration getFileConfiguration() {
         rawFile = new File(path, fileName);
+        if(!rawFile.exists()) {
+            new File(path).mkdirs();
+            try {
+                rawFile.createNewFile();
+            } catch(IOException e) {
+                e.printStackTrace();
+            }
+        }
+        FileConfiguration fc = new YamlConfiguration();
+        try {
+            fc.load(rawFile);
+        } catch (IOException | InvalidConfigurationException e) {
+            e.printStackTrace();
+        }
+        return fc;
+    }
+
+    /*public FileConfiguration getFileConfiguration() {
+        rawFile = new File(path, fileName);
         boolean newfile = false;
         if(!rawFile.exists()) {
             new File(path).mkdirs();
@@ -41,7 +60,7 @@ public class FileLoader {
             e.printStackTrace();
         }
         if(newfile)
-            ConfigDefaults.fillFile(fc);
+            ConfigDefaults.configDefaults();
         return fc;
-    }
+    }*/
 }
