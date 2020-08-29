@@ -1,0 +1,9 @@
+name: portalhunters
+main: com.portalhunters.PortalHunters
+version: 1.0
+authors: [goostuff20, gmaex]
+api-version: 1.13
+commands:
+  portalhunters:
+    description: main command
+    aliases: [ph]

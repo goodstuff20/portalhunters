@@ -1,5 +1,7 @@
 package com.portalhunters;
 
+import org.bukkit.ChatColor;
+
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
@@ -27,6 +29,10 @@ public class Utils {
             System.err.println("String can't be calculated");
         }
         return(1);
+    }
+
+    public static String replaceColors(String s) {
+        return ChatColor.translateAlternateColorCodes('&', s);
     }
 
 }

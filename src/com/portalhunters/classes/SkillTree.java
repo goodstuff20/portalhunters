@@ -6,10 +6,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SkillTree {
+
     private Skill skill;
     private SkillTree parent;
     private List<SkillTree> children;
-
 
     public SkillTree(SkillTree parent){
         this.parent = parent;
@@ -51,9 +51,9 @@ public class SkillTree {
         curS = curS + "}, ";
     }
 
-    //todo set unlocked skills etc. and load em on startup (per user)
-
     public class Skill {
+        // TODO: set unlocked skills etc. and load em on startup (per user)
+
         private String name;
         private Action action;
         private double cost; //skillpoint cost
@@ -77,8 +77,7 @@ public class SkillTree {
         }
 
         public Skill cloneSkill() {
-            Action tmpAction = new Action(action.hasListenerObserver(), action.hasRunnable());
-            return new Skill(name, tmpAction, cost);
+            return new Skill(name, action, cost);
         }
     }
 

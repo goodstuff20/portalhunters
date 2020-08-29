@@ -1,6 +1,5 @@
 package com.portalhunters.classes;
 
-import com.portalhunters.weapons.Weapon;
 import com.portalhunters.weapons.WeaponType;
 
 public enum ClassType {

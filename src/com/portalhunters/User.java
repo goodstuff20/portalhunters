@@ -1,6 +1,5 @@
 package com.portalhunters;
 
-import com.portalhunters.actions.Action;
 import com.portalhunters.classes.ClassManager;
 import com.portalhunters.classes.ClassType;
 import com.portalhunters.classes.SkillTree;
@@ -16,8 +15,6 @@ public class User {
 
     public User(Player player) {
         this.player = player;
-        // player.sendMess
-        //player.setDisplayName(""); // level and profession
         skillTree = selectedClass.getSkillTree().useThisAsBase();
     }
 
@@ -34,22 +31,9 @@ public class User {
     }
 
     public void levelUp(int levelUpExpNeeded) {
+        // TODO: add level up inventory
         currentExp -= levelUpExpNeeded;
         currentLevel++;
         player.sendMessage("level up!");
-        // TODO add level up inventory etc.
-    }
-
-    public void removeAction(Action action) {
-        // TODO fill
-    }
-
-    private void userRunnable(){ //TODO new actions, do: action.setUser(this)!
-        // all user runnables here in one scheduler vs. multiple schedulers? Can do fast scheduler and skip x ticks if waiting
-        //for(SkillTree.Skill skill : skillTree.getSkills()) {
-            if(skillTree.getSkill().getAction().hasRunnable()) {
-                skillTree.getSkill().getAction().actionRunnable(this);
-            }
-        //}
     }
 }

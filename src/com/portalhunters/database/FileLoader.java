@@ -40,27 +40,4 @@ public class FileLoader {
         }
         return fc;
     }
-
-    /*public FileConfiguration getFileConfiguration() {
-        rawFile = new File(path, fileName);
-        boolean newfile = false;
-        if(!rawFile.exists()) {
-            new File(path).mkdirs();
-            try {
-                rawFile.createNewFile();
-                newfile = true;
-            } catch(IOException e) {
-                e.printStackTrace();
-            }
-        }
-        FileConfiguration fc = new YamlConfiguration();
-        try {
-            fc.load(rawFile);
-        } catch (IOException | InvalidConfigurationException e) {
-            e.printStackTrace();
-        }
-        if(newfile)
-            ConfigDefaults.configDefaults();
-        return fc;
-    }*/
 }

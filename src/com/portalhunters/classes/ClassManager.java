@@ -15,8 +15,8 @@ public class ClassManager {
         // TODO init this in main class / onEnable
         // TODO load from config...
 
-        //if config is empty
-        fillWithDefaults();
+        // if config is empty:
+        // fillWithDefaults();
     }
 
     public SkillTree getSkillTree() {
@@ -59,6 +59,4 @@ public class ClassManager {
             }
         }
     }
-
-
 }

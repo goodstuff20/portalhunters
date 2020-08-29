@@ -1,60 +1,12 @@
 package com.portalhunters.actions;
 
-import com.portalhunters.PortalHunters;
-import com.portalhunters.User;
+import org.bukkit.entity.Player;
 
-public class Action {
-
-    //public enum ActionType {PASSIVE, ACTIVE};
-    //private ActionType actionType;
-    private boolean hasListenerObserver; //most passive skills don't need an observer
-    private boolean hasRunnable;
-    private User user;
-    //TODO strength or so?
-
-    public Action(boolean hasListenerObserver, boolean hasRunnable) {
-        this.hasListenerObserver = hasListenerObserver;
-        this.hasRunnable = hasRunnable;
-        if(hasListenerObserver){
-            observerInit();
-        }
-    }
-
-    public void stop(){
-        observerQuit();
-    }
-
-    protected void observerInit(){
-        // e.g. PortalHunters.instance.actionListener.addObserver(this, EventType.ENTITY_DEATH_EVENT);
-    }
-
-    private void observerQuit(){
-        PortalHunters.instance.actionListener.removeObserver(this);
-    }
-
-    public void observerNotify(EventType eventType){
-        //override and fit to specific action, includes triggers like rightClick weapon type...
-        // only if allowed, i.e. if one-timer action
-        // if a one-timer do ...removeObserver(this, eventType); if(user != null && hasRunnable) user.removeAction(this);
-    }
-
-    public void actionRunnable(User user) {
-        //override and fit to specific action, if hasRunnable
-    }
-
-    public boolean hasListenerObserver() {
-        return hasListenerObserver;
-    }
-
-    public boolean hasRunnable() {
-        return hasRunnable;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
+/**
+ * An abstract class representing any kind of action
+ * This includes skill-based actions, such as a buff, as well as spells
+ * actions can have schedulers inside the method, they should then self-close/-dispose after the goal or timelimit has been reached
+ */
+public abstract class Action {
+    public abstract void performPlayerAction(Player caster);
 }
