@@ -8,5 +8,5 @@ import org.bukkit.entity.Player;
  * actions can have schedulers inside the method, they should then self-close/-dispose after the goal or timelimit has been reached
  */
 public abstract class Action {
-    public abstract void performPlayerAction(Player caster);
+    public abstract void trigger(Player caster);
 }
